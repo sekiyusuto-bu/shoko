@@ -16,16 +16,16 @@ class Shoko : public rclcpp::Node
 private:
   void controller_callback(const sensor_msgs::msg::Joy & msg) const
   {
-    float Velocity = 1;
+    float Velocity = 200;
 
     auto message = robomas_plugins::msg::RobomasTarget{};
-    if(msg.buttons[1] == 1 && msg.buttons[2] == 1){
+    if(msg.buttons[1] == 1 && msg.buttons[0] == 1){
       message.target = 0;
     }
-    else if(msg.buttons[1] == 1 && msg.buttons[2] == 0){
+    else if(msg.buttons[1] == 1 && msg.buttons[0] == 0){
       message.target = Velocity;
     }
-    else if(msg.buttons[1] == 0 && msg.buttons[2] == 1){
+    else if(msg.buttons[1] == 0 && msg.buttons[0] == 1){
       message.target = -Velocity;
     }
     else{
