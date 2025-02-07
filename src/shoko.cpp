@@ -40,7 +40,7 @@ public:
   Shoko()
   : Node("shoko")
   {
-    this->controller_ = this->create_subscription<sensor_msgs::msg::Joy>("Joy", 10, std::bind(&Shoko::controller_callback, this, std::placeholders::_1));
+    this->controller_ = this->create_subscription<sensor_msgs::msg::Joy>("joy", 10, std::bind(&Shoko::controller_callback, this, std::placeholders::_1));
     this->shoko_ = this->create_publisher<robomas_plugins::msg::RobomasTarget>("robomas_target4", 10);
   }
 
