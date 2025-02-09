@@ -7,21 +7,26 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp)
-find_package(sensor_msgs)
-find_package(robomas_plugins)
+find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(robomas_plugins REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+
+INCLUDE_DIRECTORIES(
+  include
+)
 
 add_executable(shoko src/shoko.cpp)
 ament_target_dependencies(shoko
   rclcpp
   sensor_msgs
   robomas_plugins
-  )
+)
 
-install(TARGETS shoko
+install(TARGETS
+  shoko
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
