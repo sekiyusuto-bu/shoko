@@ -18,7 +18,7 @@ private:
   void controller_callback(const sensor_msgs::msg::Joy & msg) const
   {
     if(msg.buttons[7]){
-      shoko_seting_->publish(shoko::robomas_utils::to_velocity_mode(3));
+      shoko_setting_->publish(shoko::robomas_utils::to_velocity_mode(3));
     }
     if(msg.buttons[6]){
       shoko_setting_->publish(shoko::robomas_utils::to_disable_mode(3));
@@ -50,7 +50,7 @@ public:
   {
     this->controller_ = this->create_subscription<sensor_msgs::msg::Joy>("joy", 10, std::bind(&Shoko::controller_callback, this, std::placeholders::_1));
     this->shoko_ = this->create_publisher<robomas_plugins::msg::RobomasTarget>("robomas_target4", 10);
-    this->omuni_setting_  = this->create_publisher<robomas_plugins::msg::RobomasFrame>("robomas_frame", 10);
+    this->shoko_setting_  = this->create_publisher<robomas_plugins::msg::RobomasFrame>("robomas_frame", 10);
   }
 
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr controller_;
