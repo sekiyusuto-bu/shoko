@@ -8,6 +8,7 @@
 #include "std_msgs/msg/string.hpp"
 #include "robomas_plugins/msg/robomas_target.hpp"
 #include "robomas_plugins/msg/robomas_frame.hpp"
+#include "shoko/shoko_utils.hpp"
 
 using std::placeholders::_1;
 
@@ -16,7 +17,14 @@ class Shoko : public rclcpp::Node
 private:
   void controller_callback(const sensor_msgs::msg::Joy & msg) const
   {
-    float Velocity = 200;
+    if(msg.buttons[7]){
+      shoko_seting_->publish(shoko::robomas_utils::to_velocity_mode(3));
+    }
+    if(msg.buttons[6]){
+      shoko_setting_->publish(shoko::robomas_utils::to_disable_mode(3));
+    }
+
+    constexpr float Velocity = 200;
 
     auto message = robomas_plugins::msg::RobomasTarget{};
     if(msg.buttons[1] == 1 && msg.buttons[0] == 1){
@@ -42,10 +50,12 @@ public:
   {
     this->controller_ = this->create_subscription<sensor_msgs::msg::Joy>("joy", 10, std::bind(&Shoko::controller_callback, this, std::placeholders::_1));
     this->shoko_ = this->create_publisher<robomas_plugins::msg::RobomasTarget>("robomas_target4", 10);
+    this->omuni_setting_  = this->create_publisher<robomas_plugins::msg::RobomasFrame>("robomas_frame", 10);
   }
 
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr controller_;
   rclcpp::Publisher<robomas_plugins::msg::RobomasTarget>::SharedPtr shoko_;
+  rclcpp::Publisher<robomas_plugins::msg::RobomasFrame>::SharedPtr shoko_setting_;
 };
 
 int main(int argc, char * argv[])
