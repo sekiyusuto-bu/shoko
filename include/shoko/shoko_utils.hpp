@@ -2,7 +2,7 @@
 #include <robomas_plugins/msg/robomas_frame.hpp>
 #include <robomas_plugins/msg/robomas_target.hpp>
 
-namespace omuni::robomas_utils {
+namespace shoko::robomas_utils {
     /// @brief C620を速度制御するモードに遷移するRobomasFrameメッセージを作成
     /// @param moter_index 対象のロボマスモーターのID
     /// @return RobomasFrameメッセージ
