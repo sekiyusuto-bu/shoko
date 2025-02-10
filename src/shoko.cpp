@@ -24,7 +24,7 @@ private:
       shoko_setting_->publish(shoko::robomas_utils::to_disable_mode(3));
     }
 
-    constexpr float Velocity = 200;
+    constexpr float Velocity = 400;
 
     auto message = robomas_plugins::msg::RobomasTarget{};
     if(msg.buttons[1] == 1 && msg.buttons[0] == 1){
