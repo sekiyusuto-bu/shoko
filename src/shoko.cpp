@@ -27,11 +27,11 @@ private:
     constexpr float Velocity = 900;
 
     auto message = robomas_plugins::msg::RobomasTarget{};
-    if(msg.buttons[5]){
-      message.target = Velocity;
-    }
-    else if(msg.buttons[4]){
+    if(msg.axes[4]){
       message.target = -Velocity;
+    }
+    else if(msg.axes[4]){
+      message.target = Velocity;
     }
     else{
       message.target = 0;
